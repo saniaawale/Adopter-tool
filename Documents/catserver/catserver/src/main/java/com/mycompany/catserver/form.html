@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Perfect Cat - Good Home Adoption</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            accent-color: #667eea;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #5a6fd8;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .form-group h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐱 Find Your Perfect Cat</h1>
+            <p>Answer a few questions to get matched with your ideal feline companion</p>
+        </div>
+        
+        <div class="form-container">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <form id="adoption-form" action="match_cats.php" method="POST">
+                
+                <!-- Question 1: Ready to Adopt -->
+                <div class="form-group">
+                    <h3><span class="question-number">1</span> When are you ready to adopt?</h3>
+                    <select name="readiness" required>
+                        <option value="">Choose...</option>
+                        <option value="immediately">Immediately!</option>
+                        <option value="within_month">Within a month</option>
+                        <option value="within_few_months">Within a few months</option>
+                        <option value="just_looking">Just looking for now</option>
+                    </select>
+                </div>
+
+                <!-- Question 2: Household Environment -->
+                <div class="form-group">
+                    <h3><span class="question-number">2</span> What kind of environment is your household like?</h3>
+                    <select name="environment" required>
+                        <option value="">Choose...</option>
+                        <option value="quiet">Quiet</option>
+                        <option value="moderately_active">Moderately Active</option>
+                        <option value="very_active">Very Active</option>
+                    </select>
+                </div>
+
+                <!-- Question 3: Current Household -->
+                <div class="form-group">
+                    <h3><span class="question-number">3</span> Do you currently have any of the following in your household?</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="has_dogs" value="1" id="has_dogs">
+                            <label for="has_dogs">Dog(s)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="has_cats" value="1" id="has_cats">
+                            <label for="has_cats">Cat(s)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="has_children" value="1" id="has_children">
+                            <label for="has_children">Children</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4: Experience Level -->
+                <div class="form-group">
+                    <h3><span class="question-number">4</span> What's your experience level with cats?</h3>
+                    <select name="experience" required>
+                        <option value="">Choose...</option>
+                        <option value="very_experienced">Very Experienced</option>
+                        <option value="somewhat_experienced">Somewhat Experienced</option>
+                        <option value="no_experience">No Experience</option>
+                    </select>
+                </div>
+
+                <!-- Question 5: Temperament Preferences -->
+                <div class="form-group">
+                    <h3><span class="question-number">5</span> Which of the following temperaments would you be open to?</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="temperament[]" value="lap_cat" id="lap_cat">
+                            <label for="lap_cat">Lap cat</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="temperament[]" value="likes_to_be_near" id="likes_to_be_near">
+                            <label for="likes_to_be_near">Likes to be near but not on me</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="temperament[]" value="independent" id="independent">
+                            <label for="independent">Allows pets but is independent</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="temperament[]" value="sassy" id="sassy">
+                            <label for="sassy">A little sassy and feisty</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="temperament[]" value="spirit_cat" id="spirit_cat">
+                            <label for="spirit_cat">Spirit cat</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 6: Age Preference -->
+                <div class="form-group">
+                    <h3><span class="question-number">6</span> What age are you looking for?</h3>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="age[]" value="kitten" id="kitten">
+                            <label for="kitten">Kitten (Under 1 year)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="age[]" value="young_adult" id="young_adult">
+                            <label for="young_adult">Young Adult (2-4 years)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="age[]" value="older_adult" id="older_adult">
+                            <label for="older_adult">Older Adult (5-8 years)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="age[]" value="senior" id="senior">
+                            <label for="senior">Senior (9+ years)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="age[]" value="any_age" id="any_age">
+                            <label for="any_age">Any age is a good age!</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 7: Special Needs -->
+                <div class="form-group">
+                    <h3><span class="question-number">7</span> Are you open to a special needs cat?</h3>
+                    <select name="special_needs" required>
+                        <option value="">Choose...</option>
+                        <option value="very_open">Very Open</option>
+                        <option value="somewhat_open">Somewhat Open - it depends on the needs</option>
+                        <option value="not_open">Not Open at all</option>
+                    </select>
+                </div>
+
+                <!-- Question 8: Number of Cats -->
+                <div class="form-group">
+                    <h3><span class="question-number">8</span> How many cats are you looking to adopt?</h3>
+                    <select name="number_of_cats" required>
+                        <option value="">Choose...</option>
+                        <option value="1">1</option>
+                        <option value="2">2+</option>
+                    </select>
+                </div>
+
+               
+
+                <button type="submit" class="submit-button">Find My Perfect Cat Match! 🐱</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Progress bar functionality
+        const form = document.getElementById('adoption-form');
+        const progressFill = document.getElementById('progressFill');
+        const formInputs = form.querySelectorAll('select, input[type="email"]');
+        
+        function updateProgress() {
+            let filledInputs = 0;
+            const totalInputs = formInputs.length;
+            
+            formInputs.forEach(input => {
+                if (input.value) {
+                    filledInputs++;
+                }
+            });
+            
+            const progress = (filledInputs / totalInputs) * 100;
+            progressFill.style.width = progress + '%';
+        }
+        
+        // Update progress when inputs change
+        formInputs.forEach(input => {
+            input.addEventListener('change', updateProgress);
+        });
+        
+        // Handle checkbox groups for progress
+        const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                // Check if any checkbox in temperament group is checked
+                const temperamentChecked = form.querySelectorAll('input[name="temperament[]"]:checked').length > 0;
+                const ageChecked = form.querySelectorAll('input[name="age[]"]:checked').length > 0;
+                
+                // Add visual feedback for checkbox groups
+                const temperamentGroup = form.querySelector('input[name="temperament[]"]').closest('.form-group');
+                const ageGroup = form.querySelector('input[name="age[]"]').closest('.form-group');
+                
+                if (temperamentChecked) {
+                    temperamentGroup.style.borderLeft = '4px solid #667eea';
+                } else {
+                    temperamentGroup.style.borderLeft = 'none';
+                }
+                
+                if (ageChecked) {
+                    ageGroup.style.borderLeft = '4px solid #667eea';
+                } else {
+                    ageGroup.style.borderLeft = 'none';
+                }
+            });
+        });
+        
+       // Replace the form.addEventListener('submit') section in your form.html with this:
+// Replace the form.addEventListener('submit') section in your form.html with this:
+
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Validate required checkboxes
+    const temperamentChecked = form.querySelectorAll('input[name="temperament[]"]:checked').length > 0;
+    const ageChecked = form.querySelectorAll('input[name="age[]"]:checked').length > 0;
+    
+    if (!temperamentChecked) {
+        alert('Please select at least one temperament preference.');
+        return;
+    }
+    
+    if (!ageChecked) {
+        alert('Please select at least one age preference.');
+        return;
+    }
+    
+    // Collect form data
+    const formData = new FormData(form);
+    const requestData = {
+        readiness: formData.get('readiness'),
+        environment: formData.get('environment'),
+        hasDogs: formData.has('has_dogs'),
+        hasCats: formData.has('has_cats'),
+        hasChildren: formData.has('has_children'),
+        experience: formData.get('experience'),
+        temperament: Array.from(form.querySelectorAll('input[name="temperament[]"]:checked')).map(cb => cb.value),
+        age: Array.from(form.querySelectorAll('input[name="age[]"]:checked')).map(cb => cb.value),
+        specialNeeds: formData.get('special_needs'),
+        numberOfCats: parseInt(formData.get('number_of_cats'))
+    };
+    
+    try {
+        // Show loading
+        const submitButton = form.querySelector('.submit-button');
+        submitButton.textContent = 'Finding Your Perfect Matches... 🔍';
+        submitButton.disabled = true;
+        
+        // Call Java API
+        const response = await fetch('/api/match-cats', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData)
+        });
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        
+        const matchingCats = await response.json();
+        
+        // Display results
+        displayResults(matchingCats);
+        
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Sorry, there was an error finding matches. Please try again.');
+    } finally {
+        // Reset button
+        const submitButton = form.querySelector('.submit-button');
+        submitButton.textContent = 'Find My Perfect Cat Match! 🐱';
+        submitButton.disabled = false;
+    }
+});
+
+// Function to display results with BEST FIT RANKINGS
+function displayResults(cats) {
+    // Hide the form
+    document.querySelector('.form-container').style.display = 'none';
+    
+    // Create results container
+    const resultsContainer = document.createElement('div');
+    resultsContainer.className = 'results-container';
+    resultsContainer.style.padding = '40px';
+    
+    if (cats.length === 0) {
+        resultsContainer.innerHTML = `
+            <div style="text-align: center; color: #666;">
+                <h2>No Compatible Matches Found</h2>
+                <p>Don't worry! Try adjusting your preferences to see more cats.</p>
+                <button onclick="location.reload()" style="
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white; border: none; padding: 15px 30px;
+                    border-radius: 25px; font-size: 16px; cursor: pointer;
+                    margin-top: 20px;">
+                    Try Different Preferences
+                </button>
+            </div>
+        `;
+    } else {
+        let resultsHTML = `
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: #333;">🏆 Your Best Cat Matches - Ranked by Compatibility!</h2>
+                <p style="color: #666;">We found ${cats.length} great ${cats.length === 1 ? 'match' : 'matches'}, ranked from best to good fit!</p>
+                <button onclick="location.reload()" style="
+                    background: #667eea; color: white; border: none;
+                    padding: 10px 20px; border-radius: 20px; margin-bottom: 20px;
+                    cursor: pointer;">← Try Different Preferences</button>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+        `;
+        
+        cats.forEach((cat, index) => {
+            // Determine ranking colors and badges
+            let rankBadge = '';
+            let borderColor = '#e0e0e0';
+            
+            if (cat.rank === 1) {
+                rankBadge = '🥇 #1 Best Match';
+                borderColor = '#FFD700'; // Gold
+            } else if (cat.rank === 2) {
+                rankBadge = '🥈 #2 Great Match';
+                borderColor = '#C0C0C0'; // Silver
+            } else if (cat.rank === 3) {
+                rankBadge = '🥉 #3 Good Match';
+                borderColor = '#CD7F32'; // Bronze
+            } else {
+                rankBadge = `#${cat.rank} Match`;
+                borderColor = '#667eea'; // Blue
+            }
+            
+            // Determine match level color
+            let matchColor = '#28a745'; // Green for good matches
+            if (cat.matchPercentage >= 90) matchColor = '#007bff'; // Blue for perfect
+            else if (cat.matchPercentage >= 75) matchColor = '#28a745'; // Green for excellent
+            else if (cat.matchPercentage >= 60) matchColor = '#ffc107'; // Yellow for great
+            else if (cat.matchPercentage >= 45) matchColor = '#fd7e14'; // Orange for good
+            else matchColor = '#6c757d'; // Gray for fair
+
+            resultsHTML += `
+                <div style="
+                    background: #f8f9fa; border-radius: 15px; padding: 25px;
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                    border: 3px solid ${borderColor};
+                    transition: transform 0.3s ease;">
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div style="
+                            background: ${borderColor}; color: white; 
+                            padding: 5px 12px; border-radius: 20px; 
+                            font-weight: bold; font-size: 14px;">
+                            ${rankBadge}
+                        </div>
+                        <div style="
+                            background: ${matchColor}; color: white;
+                            padding: 5px 12px; border-radius: 15px;
+                            font-weight: bold; font-size: 12px;">
+                            ${cat.matchPercentage}% - ${cat.matchLevel}
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: #333; font-size: 1.5rem; margin-bottom: 15px;">${cat.name}</h3>
+                    
+                    <div style="margin-bottom: 10px; color: #666;">
+                        <strong style="color: #333;">Age:</strong> ${cat.age} years old
+                    </div>
+                    <div style="margin-bottom: 10px; color: #666;">
+                        <strong style="color: #333;">Gender:</strong> ${cat.gender.charAt(0).toUpperCase() + cat.gender.slice(1)}
+                    </div>
+                    <div style="margin-bottom: 10px; color: #666;">
+                        <strong style="color: #333;">Temperament:</strong> ${cat.temperament || 'Friendly'}
+                    </div>
+                    <div style="margin-bottom: 15px; color: #666;">
+                        <strong style="color: #333;">Description:</strong> ${cat.description || 'A wonderful cat looking for a loving home!'}
+                    </div>
+                    
+                    <div style="background: #e9ecef; padding: 12px; border-radius: 8px; margin-top: 15px;">
+                        <div style="font-size: 12px; color: #495057; margin-bottom: 5px;">
+                            <strong>Compatibility Details:</strong>
+                        </div>
+                        <div style="font-size: 11px; color: #6c757d;">
+                            ${cat.goodWithChildren ? '✅ Good with children' : '⚠️ May need time with children'} • 
+                            ${cat.goodWithDogs ? '✅ Good with dogs' : '⚠️ May need introduction to dogs'} • 
+                            ${cat.goodWithCats ? '✅ Good with cats' : '⚠️ May prefer being only cat'}
+                            ${cat.specialNeeds ? '<br>💙 Has special needs - extra love required!' : ''}
+                        </div>
+                        <div style="font-size: 11px; color: #495057; margin-top: 5px;">
+                            <strong>Compatibility Score:</strong> ${cat.compatibilityScore} points
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        resultsHTML += '</div>';
+        resultsContainer.innerHTML = resultsHTML;
+    }
+    
+    // Add results to page
+    document.querySelector('.container').appendChild(resultsContainer);
+}
+    
+  
+        // Add smooth scrolling for better mobile experience
+        const formGroups = document.querySelectorAll('.form-group');
+        formGroups.forEach((group, index) => {
+            const select = group.querySelector('select');
+            if (select) {
+                select.addEventListener('focus', function() {
+                    if (window.innerWidth <= 768) {
+                        setTimeout(() => {
+                            group.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 300);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
